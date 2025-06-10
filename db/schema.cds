@@ -53,8 +53,8 @@ type Dec  : Decimal(16, 2);
 // };
 
 entity Products : cuid {
-    Name             : String not null;
-    Description      : String;
+    Name             : localized String not null;
+    Description      : localized String;
     ImageUrl         : String;
     ReleaseDate      : DateTime default $now;
     DiscontinuedDate : DateTime;
@@ -75,7 +75,6 @@ entity Products : cuid {
 };
 
 entity Orders : cuid {
-    //key ID       : UUID;
     Date     : Date;
     Customer : String;
     Item     : Composition of many OrderItems
@@ -83,14 +82,12 @@ entity Orders : cuid {
 };
 
 entity OrderItems : cuid {
-    //key ID       : UUID;
     Order    : Association to Orders;
     Product  : Association to Products;
     Quantity : Integer;
 };
 
 entity Suppliers : cuid {
-    //key ID      : UUID;
     Name    : type of Products : Name;
     Address : Address;
     Email   : String;
@@ -102,37 +99,37 @@ entity Suppliers : cuid {
 
 entity Categories {
     key ID   : String(1);
-        Name : String;
+        Name : localized String;
 };
 
 entity StockAvailability {
     key ID          : Integer;
-        Description : String;
+        Description : localized String;
+        Product     : Association to Products;
 };
 
 entity Currencies {
     key ID          : String(3);
-        Description : String;
+        Description : localized String;
 };
 
 entity UnitOfMeasures {
     key ID          : String(2);
-        Description : String;
+        Description : localized String;
 };
 
 entity DimensionUnits {
     key ID          : String(2);
-        Description : String;
+        Description : localized String;
 };
 
 entity Months {
     key ID               : String(2);
-        Description      : String;
-        ShortDescription : String(3);
+        Description      : localized String;
+        ShortDescription : localized String(3);
 };
 
 entity ProductReview : cuid {
-    //key ID      : UUID;
     Name    : String;
     Rating  : Integer;
     Comment : String;
@@ -140,7 +137,6 @@ entity ProductReview : cuid {
 };
 
 entity SalesData : cuid {
-    //key ID            : UUID;
     DeliveryDate  : DateTime;
     Revenue       : Decimal(16, 2);
     Product       : Association to Products;

@@ -6,15 +6,17 @@
   "license": "UNLICENSED",
   "private": true,
   "dependencies": {
+    "@cap-js-community/common": "^0.2.0",
+    "@cap-js/db-service": "^2.1.1",
     "@sap-cloud-sdk/http-client": "^4.0.2",
     "@sap-cloud-sdk/resilience": "^4.0.2",
+    "@sap/cds": "^9.0.3",
     "@sap/cds-dk": "^9.0.4",
-    "better-sqlite3": "^11.10.0",
     "express": "^4.21.2"
   },
   "devDependencies": {
     "@cap-js/cds-types": "^0.10.0",
-    "@cap-js/sqlite": "^2.0.1"
+    "better-sqlite3": "^11.10.0"
   },
   "scripts": {
     "start": "cds watch"

@@ -1,10 +1,6 @@
 
 CREATE TABLE com_project_Products (
   ID NVARCHAR(36) NOT NULL,
-  createdAt TIMESTAMP_TEXT,
-  createdBy NVARCHAR(255),
-  modifiedAt TIMESTAMP_TEXT,
-  modifiedBy NVARCHAR(255),
   Name NVARCHAR(255) NOT NULL,
   Description NVARCHAR(255),
   ImageUrl NVARCHAR(255),
@@ -129,10 +125,6 @@ CREATE TABLE com_project_StudentCourse (
 
 CREATE VIEW com_project_SelProducts AS SELECT
   Products_0.ID,
-  Products_0.createdAt,
-  Products_0.createdBy,
-  Products_0.modifiedAt,
-  Products_0.modifiedBy,
   Products_0.Name,
   Products_0.Description,
   Products_0.ImageUrl,
@@ -154,10 +146,6 @@ FROM com_project_Products AS Products_0;
 
 CREATE VIEW com_project_SelProducts1 AS SELECT
   Products_0.ID,
-  Products_0.createdAt,
-  Products_0.createdBy,
-  Products_0.modifiedAt,
-  Products_0.modifiedBy,
   Products_0.Name,
   Products_0.Description,
   Products_0.ImageUrl,
@@ -193,10 +181,6 @@ ORDER BY Rating;
 
 CREATE VIEW com_project_ProjProducts AS SELECT
   Products_0.ID,
-  Products_0.createdAt,
-  Products_0.createdBy,
-  Products_0.modifiedAt,
-  Products_0.modifiedBy,
   Products_0.Name,
   Products_0.Description,
   Products_0.ImageUrl,
@@ -218,10 +202,6 @@ FROM com_project_Products AS Products_0;
 
 CREATE VIEW com_project_ProjProducts2 AS SELECT
   Products_0.ID,
-  Products_0.createdAt,
-  Products_0.createdBy,
-  Products_0.modifiedAt,
-  Products_0.modifiedBy,
   Products_0.Name,
   Products_0.Description,
   Products_0.ImageUrl,
