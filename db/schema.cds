@@ -52,7 +52,7 @@ type Dec  : Decimal(16, 2);
 //     };
 // };
 
-entity Products : cuid, managed {
+entity Products : cuid {
     Name             : String not null;
     Description      : String;
     ImageUrl         : String;
