@@ -50,7 +50,6 @@ context materials {
             Description : localized String;
             Product     : Association to Products;
     };
-
     entity Currencies {
         key ID          : String(3);
             Description : localized String;
