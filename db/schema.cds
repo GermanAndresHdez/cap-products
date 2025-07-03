@@ -108,7 +108,7 @@ context sales {
     };
 
     entity Suppliers : cuid {
-        Name    : type of materials.Products : Name;
+        Name    : localized materials.Products : Name;
         Address : Address;
         Email   : String;
         Phone   : String;
