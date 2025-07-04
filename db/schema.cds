@@ -2,7 +2,8 @@ namespace com.project;
 
 using {
     cuid,
-    managed
+    managed,
+    User
 } from '@sap/cds/common';
 
 type Name : String(50);
@@ -50,6 +51,7 @@ context materials {
             Description : localized String;
             Product     : Association to Products;
     };
+
     entity Currencies {
         key ID          : String(3);
             Description : localized String;
@@ -65,7 +67,7 @@ context materials {
             Description : localized String;
     };
 
-    entity ProductReview : cuid {
+    entity ProductReview : cuid, managed {
         Name    : String;
         Rating  : Integer;
         Comment : String;
@@ -107,7 +109,7 @@ context sales {
         Quantity : Integer;
     };
 
-    entity Suppliers : cuid {
+    entity Suppliers : cuid, managed {
         Name    : localized materials.Products : Name;
         Address : Address;
         Email   : String;
@@ -150,12 +152,23 @@ context sales {
         order by
             Rating;
 
-    entity SalesData : cuid {
+    entity SalesData : cuid, managed {
         DeliveryDate  : DateTime;
         Revenue       : Decimal(16, 2);
         Product       : Association to materials.Products;
         Currency      : Association to materials.Currencies;
         DeliveryMonth : Association to Months;
     };
+
+}
+
+context reports {
+    entity AverageRating as
+        select from project.materials.ProductReview {
+            Product.ID  as ProductId,
+            avg(Rating) as AverageRating : Decimal(16, 2)
+        }
+        group by
+            Product.ID;
 
 }

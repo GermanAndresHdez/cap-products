@@ -19,16 +19,17 @@ define service CatalogService {
 
     entity Products          as
         select from project.materials.Products {
-            ID,
-            Name          as ProductName     @mandatory,
-            Description                      @mandatory,
-            ImageUrl,
-            ReleaseDate,
-            DiscontinuedDate,
-            Price                            @mandatory,
-            Height,
-            Width,
-            Depth,
+             ID,
+             Name          as ProductName     @mandatory,
+             Description                      @mandatory,
+             ImageUrl,
+             ReleaseDate,
+             DiscontinuedDate,
+             Price                            @mandatory,
+             Height,
+             Width,
+             Depth,
+            //*,
             Quantity                         @(
                 mandatory,
                 assert.range: [
@@ -112,9 +113,51 @@ define service CatalogService {
 
     @readonly
     entity VH_DimensionUnits as
-        select from project.materials.DimensionUnits {
+        select
             ID          as Code,
             Description as Text
-        };
+        from project.materials.DimensionUnits;
+
+}
+
+define service MyService {
+
+    entity SuppliersProduct as
+        select from project.materials.Products[Name = 'Bread']{
+            *,
+            Name,
+            Description,
+            Supplier.Address
+        }
+        where
+            Supplier.Address.PostalCode = 98074;
+
+    entity SupplierToSales  as
+        select
+            Supplier.Email,
+            Category.Name,
+            SalesData.Currency.ID,
+            SalesData.Currency.Description
+        from project.materials.Products;
+
+    entity EntityInfix      as
+        select Supplier[Name = 'Exotic Liquids'].Phone from project.materials.Products
+        where
+            Products.Name = 'Bread';
+
+    entity EntityJoin       as
+        select Phone from project.materials.Products
+        left join project.sales.Suppliers as supp
+            on (
+                supp.ID   = Products.Supplier.ID
+            )
+            and supp.Name = 'Exotic Liquids'
+        where
+            Products.Name = 'Bread';
+}
+
+define service Reports {
+
+    entity AverageRating as projection on project.reports.AverageRating;
 
 }
