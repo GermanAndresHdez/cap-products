@@ -2,8 +2,7 @@ namespace com.project;
 
 using {
     cuid,
-    managed,
-    User
+    managed
 } from '@sap/cds/common';
 
 type Name : String(50);
@@ -171,4 +170,24 @@ context reports {
         group by
             Product.ID;
 
+    entity Products      as
+        select from project.materials.Products
+        mixin {
+            ToStockAvailibility : Association to project.materials.StockAvailability
+                                      on ToStockAvailibility.ID = $projection.StockAvailability;
+            ToAverageRating     : Association to AverageRating
+                                      on ToAverageRating.ProductId = ID;
+        }
+        into {
+            *,
+            ToAverageRating.AverageRating as Rating,
+            case
+                when Quantity >= 8
+                     then 3
+                when Quantity > 0
+                     then 2
+                else 1
+            end                           as StockAvailability : Integer,
+            ToStockAvailibility
+        }
 }

@@ -18,18 +18,17 @@ using com.training as training from '../db/training';
 define service CatalogService {
 
     entity Products          as
-        select from project.materials.Products {
-             ID,
-             Name          as ProductName     @mandatory,
-             Description                      @mandatory,
-             ImageUrl,
-             ReleaseDate,
-             DiscontinuedDate,
-             Price                            @mandatory,
-             Height,
-             Width,
-             Depth,
-            //*,
+        select from project.reports.Products {
+            ID,
+            Name          as ProductName     @mandatory,
+            Description                      @mandatory,
+            ImageUrl,
+            ReleaseDate,
+            DiscontinuedDate,
+            Price                            @mandatory,
+            Height,
+            Width,
+            Depth,
             Quantity                         @(
                 mandatory,
                 assert.range: [
@@ -44,7 +43,10 @@ define service CatalogService {
             DimensionUnit as ToDimensionUnit,
             SalesData,
             Supplier,
-            Reviews
+            Reviews,
+            Rating,
+            StockAvailability,
+            ToStockAvailibility
         };
 
     @readonly
@@ -148,7 +150,7 @@ define service MyService {
     entity EntityJoin       as
         select Phone from project.materials.Products
         left join project.sales.Suppliers as supp
-            on (
+            on(
                 supp.ID   = Products.Supplier.ID
             )
             and supp.Name = 'Exotic Liquids'
@@ -159,5 +161,21 @@ define service MyService {
 define service Reports {
 
     entity AverageRating as projection on project.reports.AverageRating;
+
+    entity EntityCasting as
+        select
+            cast(
+                Price as Integer
+            )     as Price,
+            Price as Price2 : Integer
+        from project.materials.Products;
+
+
+    entity EntityExits   as
+        select from project.materials.Products {
+            Name
+        }
+        where
+            exists Supplier[Name = 'Exotic Liquids'];
 
 }
