@@ -1,6 +1,6 @@
 namespace com.training;
 
-using {cuid} from '@sap/cds/common';
+using {cuid, Country} from '@sap/cds/common';
 
 entity Course : cuid {
     Student : Association to many StudentCourse
@@ -25,6 +25,7 @@ entity Orders {
         CreatedOn   : Date;
         Reviewed    : Boolean;
         Approved    : Boolean;
+        Country     : Country;
 }
 
 // type EmailsAddresses_01 : array of {
