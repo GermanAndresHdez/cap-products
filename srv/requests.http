@@ -28,4 +28,12 @@ Content-Type: application/json
 DELETE http://localhost:4004/odata/v4/manage-orders/Orders('client5@client5.com') HTTP/1.1
 
 ### Get Customer Rate - Function
-GET http://localhost:4004/odata/v4/manage-orders/getClientTaxRate(ClientEmail='client2@client2.com')
+GET http://localhost:4004/odata/v4/manage-orders/getClientTaxRate(clientEmail='client2@client2.com')
+
+### Cancel Order - Action
+POST http://localhost:4004/odata/v4/manage-orders/cancelOrder
+Content-Type: application/json
+
+{
+    "clientEmail" : "client11@client1.com"
+}
