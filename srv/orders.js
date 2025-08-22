@@ -135,7 +135,7 @@ module.exports = (srv) => {
     const { clientEmail } = req.data;
     const db = cds.transaction(req);
 
-    const resultRead = await db
+    const resulstRead = await db
       .read(Orders, ["FirstName", "LastName", "Approved"])
       .where({ ClientEmail: clientEmail });
 
@@ -145,18 +145,18 @@ module.exports = (srv) => {
     };
 
     console.log(clientEmail);
-    console.log(resultRead);
+    console.log(resulstRead);
 
-    if (resultRead[0].Approved == false) {
+    if (resulstRead[0].Approved == false) {
       const resultsUpdate = await db
         .update(Orders)
         .set({ Status: "C" })
         .where({ ClientEmail: clientEmail });
       returnOrder.status = "Succeeded";
-      returnOrder.message = `The Order placed by ${resultRead[0].FirstName} ${resultRead[0].LastName} was cancel`;
+      returnOrder.message = `The Order placed by ${resulstRead[0].FirstName} ${resulstRead[0].LastName} was cancel`;
     } else {
       returnOrder.status = "Failed";
-      returnOrder.message = `The Order placed by ${resultRead[0].FirstName} ${resultRead[0].LastName} was NOT cancel bescause was already approved`;
+      returnOrder.message = `The Order placed by ${resulstRead[0].FirstName} ${resulstRead[0].LastName} was NOT cancel bescause was already approved`;
     }
     console.log("Action cacelOrdder executed");
     return returnOrder;

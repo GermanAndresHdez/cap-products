@@ -7,7 +7,7 @@ service ManageOrders {
             Succeeded;
             Failed
         };
-        message : String;
+        message : String
     };
 
 
