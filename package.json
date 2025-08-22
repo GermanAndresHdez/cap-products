@@ -12,7 +12,8 @@
     "@sap-cloud-sdk/resilience": "^4.0.2",
     "@sap/cds": "^9.0.3",
     "@sap/cds-dk": "^9.0.4",
-    "express": "^4.21.2"
+    "express": "^4.21.2",
+    "@sap-cloud-sdk/connectivity": "^3"
   },
   "devDependencies": {
     "@cap-js/cds-types": "^0.10.0",
@@ -20,5 +21,13 @@
   },
   "scripts": {
     "start": "cds watch"
+  },
+  "cds": {
+    "requires": {
+      "sapbackend": {
+        "kind": "odata-v2",
+        "model": "srv/external/sapbackend"
+      }
+    }
   }
 }

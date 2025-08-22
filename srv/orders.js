@@ -4,6 +4,11 @@ const { data } = require("@sap/cds/lib/dbs/cds-deploy");
 const { Orders } = cds.entities("com.training");
 
 module.exports = (srv) => {
+  srv.before("*", (req) => {
+    console.log(`Method: ${req.method}`);
+    console.log(`Target: ${req.target}`);
+  });
+
   //************ READ ************/
   srv.on("READ", "Orders", async (req) => {
     if (req.data.ClientEmail !== undefined) {
@@ -135,7 +140,7 @@ module.exports = (srv) => {
     const { clientEmail } = req.data;
     const db = cds.transaction(req);
 
-    const resulstRead = await db
+    const resultsRead = await db
       .read(Orders, ["FirstName", "LastName", "Approved"])
       .where({ ClientEmail: clientEmail });
 
@@ -145,18 +150,18 @@ module.exports = (srv) => {
     };
 
     console.log(clientEmail);
-    console.log(resulstRead);
+    console.log(resultsRead);
 
-    if (resulstRead[0].Approved == false) {
+    if (resultsRead[0].Approved == false) {
       const resultsUpdate = await db
         .update(Orders)
         .set({ Status: "C" })
         .where({ ClientEmail: clientEmail });
       returnOrder.status = "Succeeded";
-      returnOrder.message = `The Order placed by ${resulstRead[0].FirstName} ${resulstRead[0].LastName} was cancel`;
+      returnOrder.message = `The Order placed by ${resultsRead[0].FirstName} ${resultsRead[0].LastName} was canceled`;
     } else {
       returnOrder.status = "Failed";
-      returnOrder.message = `The Order placed by ${resulstRead[0].FirstName} ${resulstRead[0].LastName} was NOT cancel bescause was already approved`;
+      returnOrder.message = `The Order placed by ${resultsRead[0].FirstName} ${resultsRead[0].LastName} was NOT cancel bescause was already approved`;
     }
     console.log("Action cacelOrdder executed");
     return returnOrder;

@@ -34,6 +34,13 @@ GET http://localhost:4004/odata/v4/manage-orders/getClientTaxRate(clientEmail='c
 POST http://localhost:4004/odata/v4/manage-orders/cancelOrder
 Content-Type: application/json
 
-{
-    "clientEmail" : "client11@client1.com"
-}
+{ "clientEmail" : "client2@client2.com" }
+
+### Get Customer Rate - Function Bound
+GET http://localhost:4004/odata/v4/manage-orders/Orders('client1@client1.com')/ManageOrders.getClientTaxRate(clientEmail='client2@client2.com')
+
+### Cancel Order - Action Bound
+POST http://localhost:4004/odata/v4/manage-orders/Orders('client1@client1.com')/ManageOrders.cancelOrder
+Content-Type: application/json
+
+{ "clientEmail" : "client2@client2.com" }
