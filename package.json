@@ -8,12 +8,13 @@
   "dependencies": {
     "@cap-js-community/common": "^0.2.0",
     "@cap-js/db-service": "^2.1.1",
+    "@sap-cloud-sdk/connectivity": "^3",
     "@sap-cloud-sdk/http-client": "^4.0.2",
     "@sap-cloud-sdk/resilience": "^4.0.2",
     "@sap/cds": "^9.0.3",
     "@sap/cds-dk": "^9.0.4",
-    "express": "^4.21.2",
-    "@sap-cloud-sdk/connectivity": "^3"
+    "cors": "^2.8.5",
+    "express": "^4.21.2"
   },
   "devDependencies": {
     "@cap-js/cds-types": "^0.10.0",
