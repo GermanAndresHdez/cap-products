@@ -14,8 +14,12 @@
     "@sap-cloud-sdk/resilience": "^4.0.2",
     "@sap/cds": "^9.0.3",
     "@sap/cds-dk": "^9.0.4",
+    "axios": "^1.12.2",
     "cors": "^2.8.5",
-    "express": "^4.21.2",
+    "express": "^4.21.2"
+  },
+  "devDependencies": {
+    "better-sqlite3": "^11.10.0",
     "sqlite": "^5.1.1",
     "sqlite3": "^5.1.7"
   },
