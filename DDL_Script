@@ -1,6 +1,10 @@
 
-CREATE TABLE com_project_Products (
+CREATE TABLE com_project_materials_Products (
   ID NVARCHAR(36) NOT NULL,
+  createdAt TIMESTAMP_TEXT,
+  createdBy NVARCHAR(255),
+  modifiedAt TIMESTAMP_TEXT,
+  modifiedBy NVARCHAR(255),
   Name NVARCHAR(255) NOT NULL,
   Description NVARCHAR(255),
   ImageUrl NVARCHAR(255),
@@ -21,14 +25,58 @@ CREATE TABLE com_project_Products (
   PRIMARY KEY(ID)
 );
 
-CREATE TABLE com_project_Orders (
+CREATE TABLE com_project_materials_Categories (
+  ID NVARCHAR(1) NOT NULL,
+  Name NVARCHAR(255),
+  PRIMARY KEY(ID)
+);
+
+CREATE TABLE com_project_materials_StockAvailability (
+  ID INTEGER NOT NULL,
+  Description NVARCHAR(255),
+  Product_ID NVARCHAR(36),
+  PRIMARY KEY(ID)
+);
+
+CREATE TABLE com_project_materials_Currencies (
+  ID NVARCHAR(3) NOT NULL,
+  Description NVARCHAR(255),
+  PRIMARY KEY(ID)
+);
+
+CREATE TABLE com_project_materials_UnitOfMeasures (
+  ID NVARCHAR(2) NOT NULL,
+  Description NVARCHAR(255),
+  PRIMARY KEY(ID)
+);
+
+CREATE TABLE com_project_materials_DimensionUnits (
+  ID NVARCHAR(2) NOT NULL,
+  Description NVARCHAR(255),
+  PRIMARY KEY(ID)
+);
+
+CREATE TABLE com_project_materials_ProductReview (
+  ID NVARCHAR(36) NOT NULL,
+  createdAt TIMESTAMP_TEXT,
+  createdBy NVARCHAR(255),
+  modifiedAt TIMESTAMP_TEXT,
+  modifiedBy NVARCHAR(255),
+  Name NVARCHAR(255),
+  Rating INTEGER,
+  Comment NVARCHAR(255),
+  Product_ID NVARCHAR(36),
+  PRIMARY KEY(ID)
+);
+
+CREATE TABLE com_project_sales_Orders (
   ID NVARCHAR(36) NOT NULL,
   Date DATE_TEXT,
   Customer NVARCHAR(255),
   PRIMARY KEY(ID)
 );
 
-CREATE TABLE com_project_OrderItems (
+CREATE TABLE com_project_sales_OrderItems (
   ID NVARCHAR(36) NOT NULL,
   Order_ID NVARCHAR(36),
   Product_ID NVARCHAR(36),
@@ -36,8 +84,12 @@ CREATE TABLE com_project_OrderItems (
   PRIMARY KEY(ID)
 );
 
-CREATE TABLE com_project_Suppliers (
+CREATE TABLE com_project_sales_Suppliers (
   ID NVARCHAR(36) NOT NULL,
+  createdAt TIMESTAMP_TEXT,
+  createdBy NVARCHAR(255),
+  modifiedAt TIMESTAMP_TEXT,
+  modifiedBy NVARCHAR(255),
   Name NVARCHAR(255) NOT NULL,
   Address_Street NVARCHAR(255),
   Address_City NVARCHAR(255),
@@ -50,55 +102,19 @@ CREATE TABLE com_project_Suppliers (
   PRIMARY KEY(ID)
 );
 
-CREATE TABLE com_project_Categories (
-  ID NVARCHAR(1) NOT NULL,
-  Name NVARCHAR(255),
-  PRIMARY KEY(ID)
-);
-
-CREATE TABLE com_project_StockAvailability (
-  ID INTEGER NOT NULL,
-  Description NVARCHAR(255),
-  Product_ID NVARCHAR(36),
-  PRIMARY KEY(ID)
-);
-
-CREATE TABLE com_project_Currencies (
-  ID NVARCHAR(3) NOT NULL,
-  Description NVARCHAR(255),
-  PRIMARY KEY(ID)
-);
-
-CREATE TABLE com_project_UnitOfMeasures (
-  ID NVARCHAR(2) NOT NULL,
-  Description NVARCHAR(255),
-  PRIMARY KEY(ID)
-);
-
-CREATE TABLE com_project_DimensionUnits (
-  ID NVARCHAR(2) NOT NULL,
-  Description NVARCHAR(255),
-  PRIMARY KEY(ID)
-);
-
-CREATE TABLE com_project_Months (
+CREATE TABLE com_project_sales_Months (
   ID NVARCHAR(2) NOT NULL,
   Description NVARCHAR(255),
   ShortDescription NVARCHAR(3),
   PRIMARY KEY(ID)
 );
 
-CREATE TABLE com_project_ProductReview (
+CREATE TABLE com_project_sales_SalesData (
   ID NVARCHAR(36) NOT NULL,
-  Name NVARCHAR(255),
-  Rating INTEGER,
-  Comment NVARCHAR(255),
-  Product_ID NVARCHAR(36),
-  PRIMARY KEY(ID)
-);
-
-CREATE TABLE com_project_SalesData (
-  ID NVARCHAR(36) NOT NULL,
+  createdAt TIMESTAMP_TEXT,
+  createdBy NVARCHAR(255),
+  modifiedAt TIMESTAMP_TEXT,
+  modifiedBy NVARCHAR(255),
   DeliveryDate DATETIME_TEXT,
   Revenue DECIMAL(16, 2),
   Product_ID NVARCHAR(36),
@@ -107,24 +123,7 @@ CREATE TABLE com_project_SalesData (
   PRIMARY KEY(ID)
 );
 
-CREATE TABLE com_project_Course (
-  ID NVARCHAR(36) NOT NULL,
-  PRIMARY KEY(ID)
-);
-
-CREATE TABLE com_project_Student (
-  ID NVARCHAR(36) NOT NULL,
-  PRIMARY KEY(ID)
-);
-
-CREATE TABLE com_project_StudentCourse (
-  ID NVARCHAR(36) NOT NULL,
-  Student_ID NVARCHAR(36),
-  Course_ID NVARCHAR(36),
-  PRIMARY KEY(ID)
-);
-
-CREATE TABLE com_project_Products_texts (
+CREATE TABLE com_project_materials_Products_texts (
   locale NVARCHAR(14) NOT NULL,
   ID NVARCHAR(36) NOT NULL,
   Name NVARCHAR(255) NOT NULL,
@@ -132,42 +131,49 @@ CREATE TABLE com_project_Products_texts (
   PRIMARY KEY(locale, ID)
 );
 
-CREATE TABLE com_project_Categories_texts (
+CREATE TABLE com_project_materials_Categories_texts (
   locale NVARCHAR(14) NOT NULL,
   ID NVARCHAR(1) NOT NULL,
   Name NVARCHAR(255),
   PRIMARY KEY(locale, ID)
 );
 
-CREATE TABLE com_project_StockAvailability_texts (
+CREATE TABLE com_project_materials_StockAvailability_texts (
   locale NVARCHAR(14) NOT NULL,
   ID INTEGER NOT NULL,
   Description NVARCHAR(255),
   PRIMARY KEY(locale, ID)
 );
 
-CREATE TABLE com_project_Currencies_texts (
+CREATE TABLE com_project_materials_Currencies_texts (
   locale NVARCHAR(14) NOT NULL,
   ID NVARCHAR(3) NOT NULL,
   Description NVARCHAR(255),
   PRIMARY KEY(locale, ID)
 );
 
-CREATE TABLE com_project_UnitOfMeasures_texts (
+CREATE TABLE com_project_materials_UnitOfMeasures_texts (
   locale NVARCHAR(14) NOT NULL,
   ID NVARCHAR(2) NOT NULL,
   Description NVARCHAR(255),
   PRIMARY KEY(locale, ID)
 );
 
-CREATE TABLE com_project_DimensionUnits_texts (
+CREATE TABLE com_project_materials_DimensionUnits_texts (
   locale NVARCHAR(14) NOT NULL,
   ID NVARCHAR(2) NOT NULL,
   Description NVARCHAR(255),
   PRIMARY KEY(locale, ID)
 );
 
-CREATE TABLE com_project_Months_texts (
+CREATE TABLE com_project_sales_Suppliers_texts (
+  locale NVARCHAR(14) NOT NULL,
+  ID NVARCHAR(36) NOT NULL,
+  Name NVARCHAR(255) NOT NULL,
+  PRIMARY KEY(locale, ID)
+);
+
+CREATE TABLE com_project_sales_Months_texts (
   locale NVARCHAR(14) NOT NULL,
   ID NVARCHAR(2) NOT NULL,
   Description NVARCHAR(255),
@@ -175,15 +181,12 @@ CREATE TABLE com_project_Months_texts (
   PRIMARY KEY(locale, ID)
 );
 
-CREATE TABLE com_project_Suppliers_texts (
-  locale NVARCHAR(14) NOT NULL,
-  ID NVARCHAR(36) NOT NULL,
-  Name NVARCHAR(255) NOT NULL,
-  PRIMARY KEY(locale, ID)
-);
-
-CREATE VIEW com_project_SelProducts AS SELECT
+CREATE VIEW com_project_materials_SelProducts AS SELECT
   Products_0.ID,
+  Products_0.createdAt,
+  Products_0.createdBy,
+  Products_0.modifiedAt,
+  Products_0.modifiedBy,
   Products_0.Name,
   Products_0.Description,
   Products_0.ImageUrl,
@@ -201,10 +204,14 @@ CREATE VIEW com_project_SelProducts AS SELECT
   Products_0.Category_ID,
   Products_0.PriceCondition,
   Products_0.PriceDetermination
-FROM com_project_Products AS Products_0;
+FROM com_project_materials_Products AS Products_0;
 
-CREATE VIEW com_project_SelProducts1 AS SELECT
+CREATE VIEW com_project_materials_ProjProducts AS SELECT
   Products_0.ID,
+  Products_0.createdAt,
+  Products_0.createdBy,
+  Products_0.modifiedAt,
+  Products_0.modifiedBy,
   Products_0.Name,
   Products_0.Description,
   Products_0.ImageUrl,
@@ -222,71 +229,89 @@ CREATE VIEW com_project_SelProducts1 AS SELECT
   Products_0.Category_ID,
   Products_0.PriceCondition,
   Products_0.PriceDetermination
-FROM com_project_Products AS Products_0;
+FROM com_project_materials_Products AS Products_0;
 
-CREATE VIEW com_project_SelProducts2 AS SELECT
+CREATE VIEW com_project_materials_ProjProducts2 AS SELECT
+  Products_0.ID,
+  Products_0.createdAt,
+  Products_0.createdBy,
+  Products_0.modifiedAt,
+  Products_0.modifiedBy,
+  Products_0.Name,
+  Products_0.Description,
+  Products_0.ImageUrl,
+  Products_0.ReleaseDate,
+  Products_0.DiscontinuedDate,
+  Products_0.Price,
+  Products_0.Height,
+  Products_0.Width,
+  Products_0.Depth,
+  Products_0.Quantity,
+  Products_0.Supplier_ID,
+  Products_0.UnitOfMeasure_ID,
+  Products_0.Currency_ID,
+  Products_0.DimensionUnit_ID,
+  Products_0.Category_ID,
+  Products_0.PriceCondition,
+  Products_0.PriceDetermination
+FROM com_project_materials_Products AS Products_0;
+
+CREATE VIEW com_project_materials_ProjProducts3 AS SELECT
+  Products_0.ReleaseDate,
+  Products_0.Name
+FROM com_project_materials_Products AS Products_0;
+
+CREATE VIEW com_project_sales_SelProducts1 AS SELECT
+  Products_0.ID,
+  Products_0.createdAt,
+  Products_0.createdBy,
+  Products_0.modifiedAt,
+  Products_0.modifiedBy,
+  Products_0.Name,
+  Products_0.Description,
+  Products_0.ImageUrl,
+  Products_0.ReleaseDate,
+  Products_0.DiscontinuedDate,
+  Products_0.Price,
+  Products_0.Height,
+  Products_0.Width,
+  Products_0.Depth,
+  Products_0.Quantity,
+  Products_0.Supplier_ID,
+  Products_0.UnitOfMeasure_ID,
+  Products_0.Currency_ID,
+  Products_0.DimensionUnit_ID,
+  Products_0.Category_ID,
+  Products_0.PriceCondition,
+  Products_0.PriceDetermination
+FROM com_project_materials_Products AS Products_0;
+
+CREATE VIEW com_project_sales_SelProducts2 AS SELECT
   Products_0.Name,
   Products_0.Price,
   Products_0.Quantity
-FROM com_project_Products AS Products_0;
+FROM com_project_materials_Products AS Products_0;
 
-CREATE VIEW com_project_SelProducts3 AS SELECT
+CREATE VIEW com_project_sales_SelProducts3 AS SELECT
   ProductReview_1.Rating,
   Products_0.Name,
   sum(Products_0.Price) AS TotalPrice
-FROM (com_project_Products AS Products_0 LEFT JOIN com_project_ProductReview AS ProductReview_1 ON Products_0.Name = ProductReview_1.Name)
+FROM (com_project_materials_Products AS Products_0 LEFT JOIN com_project_materials_ProductReview AS ProductReview_1 ON Products_0.Name = ProductReview_1.Name)
 GROUP BY ProductReview_1.Rating, Products_0.Name
 ORDER BY Rating;
 
-CREATE VIEW com_project_ProjProducts AS SELECT
-  Products_0.ID,
-  Products_0.Name,
-  Products_0.Description,
-  Products_0.ImageUrl,
-  Products_0.ReleaseDate,
-  Products_0.DiscontinuedDate,
-  Products_0.Price,
-  Products_0.Height,
-  Products_0.Width,
-  Products_0.Depth,
-  Products_0.Quantity,
-  Products_0.Supplier_ID,
-  Products_0.UnitOfMeasure_ID,
-  Products_0.Currency_ID,
-  Products_0.DimensionUnit_ID,
-  Products_0.Category_ID,
-  Products_0.PriceCondition,
-  Products_0.PriceDetermination
-FROM com_project_Products AS Products_0;
+CREATE VIEW com_project_reports_AverageRating AS SELECT
+  ProductReview_0.Product_ID AS ProductId,
+  avg(ProductReview_0.Rating) AS AverageRating
+FROM com_project_materials_ProductReview AS ProductReview_0
+GROUP BY ProductReview_0.Product_ID;
 
-CREATE VIEW com_project_ProjProducts2 AS SELECT
-  Products_0.ID,
-  Products_0.Name,
-  Products_0.Description,
-  Products_0.ImageUrl,
-  Products_0.ReleaseDate,
-  Products_0.DiscontinuedDate,
-  Products_0.Price,
-  Products_0.Height,
-  Products_0.Width,
-  Products_0.Depth,
-  Products_0.Quantity,
-  Products_0.Supplier_ID,
-  Products_0.UnitOfMeasure_ID,
-  Products_0.Currency_ID,
-  Products_0.DimensionUnit_ID,
-  Products_0.Category_ID,
-  Products_0.PriceCondition,
-  Products_0.PriceDetermination
-FROM com_project_Products AS Products_0;
-
-CREATE VIEW com_project_ProjProducts3 AS SELECT
-  Products_0.ReleaseDate,
-  Products_0.Name
-FROM com_project_Products AS Products_0;
-
-CREATE VIEW localized_com_project_Products AS SELECT
+CREATE VIEW localized_com_project_materials_Products AS SELECT
   L_0.ID,
+  L_0.createdAt,
+  L_0.createdBy,
+  L_0.modifiedAt,
+  L_0.modifiedBy,
   coalesce(localized_1.Name, L_0.Name) AS Name,
   coalesce(localized_1.Description, L_0.Description) AS Description,
   L_0.ImageUrl,
@@ -304,10 +329,40 @@ CREATE VIEW localized_com_project_Products AS SELECT
   L_0.Category_ID,
   L_0.PriceCondition,
   L_0.PriceDetermination
-FROM (com_project_Products AS L_0 LEFT JOIN com_project_Products_texts AS localized_1 ON localized_1.ID = L_0.ID AND localized_1.locale = session_context( '$user.locale' ));
+FROM (com_project_materials_Products AS L_0 LEFT JOIN com_project_materials_Products_texts AS localized_1 ON localized_1.ID = L_0.ID AND localized_1.locale = session_context( '$user.locale' ));
 
-CREATE VIEW localized_com_project_Suppliers AS SELECT
+CREATE VIEW localized_com_project_materials_Categories AS SELECT
   L_0.ID,
+  coalesce(localized_1.Name, L_0.Name) AS Name
+FROM (com_project_materials_Categories AS L_0 LEFT JOIN com_project_materials_Categories_texts AS localized_1 ON localized_1.ID = L_0.ID AND localized_1.locale = session_context( '$user.locale' ));
+
+CREATE VIEW localized_com_project_materials_StockAvailability AS SELECT
+  L_0.ID,
+  coalesce(localized_1.Description, L_0.Description) AS Description,
+  L_0.Product_ID
+FROM (com_project_materials_StockAvailability AS L_0 LEFT JOIN com_project_materials_StockAvailability_texts AS localized_1 ON localized_1.ID = L_0.ID AND localized_1.locale = session_context( '$user.locale' ));
+
+CREATE VIEW localized_com_project_materials_Currencies AS SELECT
+  L_0.ID,
+  coalesce(localized_1.Description, L_0.Description) AS Description
+FROM (com_project_materials_Currencies AS L_0 LEFT JOIN com_project_materials_Currencies_texts AS localized_1 ON localized_1.ID = L_0.ID AND localized_1.locale = session_context( '$user.locale' ));
+
+CREATE VIEW localized_com_project_materials_UnitOfMeasures AS SELECT
+  L_0.ID,
+  coalesce(localized_1.Description, L_0.Description) AS Description
+FROM (com_project_materials_UnitOfMeasures AS L_0 LEFT JOIN com_project_materials_UnitOfMeasures_texts AS localized_1 ON localized_1.ID = L_0.ID AND localized_1.locale = session_context( '$user.locale' ));
+
+CREATE VIEW localized_com_project_materials_DimensionUnits AS SELECT
+  L_0.ID,
+  coalesce(localized_1.Description, L_0.Description) AS Description
+FROM (com_project_materials_DimensionUnits AS L_0 LEFT JOIN com_project_materials_DimensionUnits_texts AS localized_1 ON localized_1.ID = L_0.ID AND localized_1.locale = session_context( '$user.locale' ));
+
+CREATE VIEW localized_com_project_sales_Suppliers AS SELECT
+  L_0.ID,
+  L_0.createdAt,
+  L_0.createdBy,
+  L_0.modifiedAt,
+  L_0.modifiedBy,
   coalesce(localized_1.Name, L_0.Name) AS Name,
   L_0.Address_Street,
   L_0.Address_City,
@@ -317,42 +372,47 @@ CREATE VIEW localized_com_project_Suppliers AS SELECT
   L_0.Email,
   L_0.Phone,
   L_0.Fax
-FROM (com_project_Suppliers AS L_0 LEFT JOIN com_project_Suppliers_texts AS localized_1 ON localized_1.ID = L_0.ID AND localized_1.locale = session_context( '$user.locale' ));
+FROM (com_project_sales_Suppliers AS L_0 LEFT JOIN com_project_sales_Suppliers_texts AS localized_1 ON localized_1.ID = L_0.ID AND localized_1.locale = session_context( '$user.locale' ));
 
-CREATE VIEW localized_com_project_Categories AS SELECT
-  L_0.ID,
-  coalesce(localized_1.Name, L_0.Name) AS Name
-FROM (com_project_Categories AS L_0 LEFT JOIN com_project_Categories_texts AS localized_1 ON localized_1.ID = L_0.ID AND localized_1.locale = session_context( '$user.locale' ));
-
-CREATE VIEW localized_com_project_StockAvailability AS SELECT
-  L_0.ID,
-  coalesce(localized_1.Description, L_0.Description) AS Description,
-  L_0.Product_ID
-FROM (com_project_StockAvailability AS L_0 LEFT JOIN com_project_StockAvailability_texts AS localized_1 ON localized_1.ID = L_0.ID AND localized_1.locale = session_context( '$user.locale' ));
-
-CREATE VIEW localized_com_project_Currencies AS SELECT
-  L_0.ID,
-  coalesce(localized_1.Description, L_0.Description) AS Description
-FROM (com_project_Currencies AS L_0 LEFT JOIN com_project_Currencies_texts AS localized_1 ON localized_1.ID = L_0.ID AND localized_1.locale = session_context( '$user.locale' ));
-
-CREATE VIEW localized_com_project_UnitOfMeasures AS SELECT
-  L_0.ID,
-  coalesce(localized_1.Description, L_0.Description) AS Description
-FROM (com_project_UnitOfMeasures AS L_0 LEFT JOIN com_project_UnitOfMeasures_texts AS localized_1 ON localized_1.ID = L_0.ID AND localized_1.locale = session_context( '$user.locale' ));
-
-CREATE VIEW localized_com_project_DimensionUnits AS SELECT
-  L_0.ID,
-  coalesce(localized_1.Description, L_0.Description) AS Description
-FROM (com_project_DimensionUnits AS L_0 LEFT JOIN com_project_DimensionUnits_texts AS localized_1 ON localized_1.ID = L_0.ID AND localized_1.locale = session_context( '$user.locale' ));
-
-CREATE VIEW localized_com_project_Months AS SELECT
+CREATE VIEW localized_com_project_sales_Months AS SELECT
   L_0.ID,
   coalesce(localized_1.Description, L_0.Description) AS Description,
   coalesce(localized_1.ShortDescription, L_0.ShortDescription) AS ShortDescription
-FROM (com_project_Months AS L_0 LEFT JOIN com_project_Months_texts AS localized_1 ON localized_1.ID = L_0.ID AND localized_1.locale = session_context( '$user.locale' ));
+FROM (com_project_sales_Months AS L_0 LEFT JOIN com_project_sales_Months_texts AS localized_1 ON localized_1.ID = L_0.ID AND localized_1.locale = session_context( '$user.locale' ));
 
-CREATE VIEW localized_com_project_SelProducts AS SELECT
+CREATE VIEW com_project_reports_Products AS SELECT
   Products_0.ID,
+  Products_0.createdAt,
+  Products_0.createdBy,
+  Products_0.modifiedAt,
+  Products_0.modifiedBy,
+  Products_0.Name,
+  Products_0.Description,
+  Products_0.ImageUrl,
+  Products_0.ReleaseDate,
+  Products_0.DiscontinuedDate,
+  Products_0.Price,
+  Products_0.Height,
+  Products_0.Width,
+  Products_0.Depth,
+  Products_0.Quantity,
+  Products_0.Supplier_ID,
+  Products_0.UnitOfMeasure_ID,
+  Products_0.Currency_ID,
+  Products_0.DimensionUnit_ID,
+  Products_0.Category_ID,
+  Products_0.PriceCondition,
+  Products_0.PriceDetermination,
+  ToAverageRating_1.AverageRating AS Rating,
+  CASE WHEN Products_0.Quantity >= 8 THEN 3 WHEN Products_0.Quantity > 0 THEN 2 ELSE 1 END AS StockAvailability
+FROM (com_project_materials_Products AS Products_0 LEFT JOIN com_project_reports_AverageRating AS ToAverageRating_1 ON ToAverageRating_1.ProductId = Products_0.ID);
+
+CREATE VIEW localized_com_project_materials_SelProducts AS SELECT
+  Products_0.ID,
+  Products_0.createdAt,
+  Products_0.createdBy,
+  Products_0.modifiedAt,
+  Products_0.modifiedBy,
   Products_0.Name,
   Products_0.Description,
   Products_0.ImageUrl,
@@ -370,10 +430,14 @@ CREATE VIEW localized_com_project_SelProducts AS SELECT
   Products_0.Category_ID,
   Products_0.PriceCondition,
   Products_0.PriceDetermination
-FROM localized_com_project_Products AS Products_0;
+FROM localized_com_project_materials_Products AS Products_0;
 
-CREATE VIEW localized_com_project_SelProducts1 AS SELECT
+CREATE VIEW localized_com_project_materials_ProjProducts AS SELECT
   Products_0.ID,
+  Products_0.createdAt,
+  Products_0.createdBy,
+  Products_0.modifiedAt,
+  Products_0.modifiedBy,
   Products_0.Name,
   Products_0.Description,
   Products_0.ImageUrl,
@@ -391,24 +455,83 @@ CREATE VIEW localized_com_project_SelProducts1 AS SELECT
   Products_0.Category_ID,
   Products_0.PriceCondition,
   Products_0.PriceDetermination
-FROM localized_com_project_Products AS Products_0;
+FROM localized_com_project_materials_Products AS Products_0;
 
-CREATE VIEW localized_com_project_SelProducts2 AS SELECT
+CREATE VIEW localized_com_project_materials_ProjProducts2 AS SELECT
+  Products_0.ID,
+  Products_0.createdAt,
+  Products_0.createdBy,
+  Products_0.modifiedAt,
+  Products_0.modifiedBy,
+  Products_0.Name,
+  Products_0.Description,
+  Products_0.ImageUrl,
+  Products_0.ReleaseDate,
+  Products_0.DiscontinuedDate,
+  Products_0.Price,
+  Products_0.Height,
+  Products_0.Width,
+  Products_0.Depth,
+  Products_0.Quantity,
+  Products_0.Supplier_ID,
+  Products_0.UnitOfMeasure_ID,
+  Products_0.Currency_ID,
+  Products_0.DimensionUnit_ID,
+  Products_0.Category_ID,
+  Products_0.PriceCondition,
+  Products_0.PriceDetermination
+FROM localized_com_project_materials_Products AS Products_0;
+
+CREATE VIEW localized_com_project_materials_ProjProducts3 AS SELECT
+  Products_0.ReleaseDate,
+  Products_0.Name
+FROM localized_com_project_materials_Products AS Products_0;
+
+CREATE VIEW localized_com_project_sales_SelProducts1 AS SELECT
+  Products_0.ID,
+  Products_0.createdAt,
+  Products_0.createdBy,
+  Products_0.modifiedAt,
+  Products_0.modifiedBy,
+  Products_0.Name,
+  Products_0.Description,
+  Products_0.ImageUrl,
+  Products_0.ReleaseDate,
+  Products_0.DiscontinuedDate,
+  Products_0.Price,
+  Products_0.Height,
+  Products_0.Width,
+  Products_0.Depth,
+  Products_0.Quantity,
+  Products_0.Supplier_ID,
+  Products_0.UnitOfMeasure_ID,
+  Products_0.Currency_ID,
+  Products_0.DimensionUnit_ID,
+  Products_0.Category_ID,
+  Products_0.PriceCondition,
+  Products_0.PriceDetermination
+FROM localized_com_project_materials_Products AS Products_0;
+
+CREATE VIEW localized_com_project_sales_SelProducts2 AS SELECT
   Products_0.Name,
   Products_0.Price,
   Products_0.Quantity
-FROM localized_com_project_Products AS Products_0;
+FROM localized_com_project_materials_Products AS Products_0;
 
-CREATE VIEW localized_com_project_SelProducts3 AS SELECT
+CREATE VIEW localized_com_project_sales_SelProducts3 AS SELECT
   ProductReview_1.Rating,
   Products_0.Name,
   sum(Products_0.Price) AS TotalPrice
-FROM (localized_com_project_Products AS Products_0 LEFT JOIN com_project_ProductReview AS ProductReview_1 ON Products_0.Name = ProductReview_1.Name)
+FROM (localized_com_project_materials_Products AS Products_0 LEFT JOIN com_project_materials_ProductReview AS ProductReview_1 ON Products_0.Name = ProductReview_1.Name)
 GROUP BY ProductReview_1.Rating, Products_0.Name
 ORDER BY Rating;
 
-CREATE VIEW localized_com_project_ProjProducts AS SELECT
+CREATE VIEW localized_com_project_reports_Products AS SELECT
   Products_0.ID,
+  Products_0.createdAt,
+  Products_0.createdBy,
+  Products_0.modifiedAt,
+  Products_0.modifiedBy,
   Products_0.Name,
   Products_0.Description,
   Products_0.ImageUrl,
@@ -425,32 +548,8 @@ CREATE VIEW localized_com_project_ProjProducts AS SELECT
   Products_0.DimensionUnit_ID,
   Products_0.Category_ID,
   Products_0.PriceCondition,
-  Products_0.PriceDetermination
-FROM localized_com_project_Products AS Products_0;
-
-CREATE VIEW localized_com_project_ProjProducts2 AS SELECT
-  Products_0.ID,
-  Products_0.Name,
-  Products_0.Description,
-  Products_0.ImageUrl,
-  Products_0.ReleaseDate,
-  Products_0.DiscontinuedDate,
-  Products_0.Price,
-  Products_0.Height,
-  Products_0.Width,
-  Products_0.Depth,
-  Products_0.Quantity,
-  Products_0.Supplier_ID,
-  Products_0.UnitOfMeasure_ID,
-  Products_0.Currency_ID,
-  Products_0.DimensionUnit_ID,
-  Products_0.Category_ID,
-  Products_0.PriceCondition,
-  Products_0.PriceDetermination
-FROM localized_com_project_Products AS Products_0;
-
-CREATE VIEW localized_com_project_ProjProducts3 AS SELECT
-  Products_0.ReleaseDate,
-  Products_0.Name
-FROM localized_com_project_Products AS Products_0;
+  Products_0.PriceDetermination,
+  ToAverageRating_1.AverageRating AS Rating,
+  CASE WHEN Products_0.Quantity >= 8 THEN 3 WHEN Products_0.Quantity > 0 THEN 2 ELSE 1 END AS StockAvailability
+FROM (localized_com_project_materials_Products AS Products_0 LEFT JOIN com_project_reports_AverageRating AS ToAverageRating_1 ON ToAverageRating_1.ProductId = Products_0.ID);
 
