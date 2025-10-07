@@ -32,9 +32,6 @@
     "start": "cds watch"
   },
   "cds": {
-    "features": {
-      "graphql": true
-    },
     "requires": {
       "sapbackend": {
         "kind": "odata-v2",
